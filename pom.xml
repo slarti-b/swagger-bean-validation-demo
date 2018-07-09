@@ -80,7 +80,7 @@
 				<version>${swagger.codegen.version}</version>
 				<executions>
 					<execution>
-						<id>${carus-api-codegen-artifact-url}</id>
+						<id>com.carus.api.bug.models</id>
 						<goals>
 							<goal>generate</goal>
 						</goals>
