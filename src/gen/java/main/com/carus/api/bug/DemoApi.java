@@ -30,11 +30,15 @@ public interface DemoApi {
     DemoApiDelegate getDelegate();
 
     @ApiOperation(value = "Demo of bug", nickname = "postDemo", notes = "", tags={  })
-    @ApiResponses(value = {  })
-    @RequestMapping(value = "demo",
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "OK"),
+        @ApiResponse(code = 400, message = "Invalid") })
+    @RequestMapping(value = "/demo",
+        produces = { "application/json" }, 
+        consumes = { "application/json" },
         method = RequestMethod.POST)
-    default CompletableFuture<ResponseEntity<Void>> postDemo(@ApiParam(value = "Body param" ,required=true )  @Valid @RequestBody DemoBody body) {
-        return getDelegate().postDemo(body);
+    default CompletableFuture<ResponseEntity<Void>> postDemo(@ApiParam(value = "Body param" ,required=true )  @Valid @RequestBody DemoBody bodyObj) {
+        return getDelegate().postDemo(bodyObj);
     }
 
 }

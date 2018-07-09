@@ -1,6 +1,7 @@
 package com.carus.api.bug.models;
 
 import java.util.Objects;
+import com.carus.api.bug.models.DemoSub;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -94,6 +95,12 @@ public class DemoBody  implements Serializable {
   @JsonProperty("qux")
   private QuxEnum qux = null;
 
+  @JsonProperty("reqSub")
+  private DemoSub reqSub = null;
+
+  @JsonProperty("optSub")
+  private DemoSub optSub = null;
+
   public DemoBody foo(String foo) {
     this.foo = foo;
     return this;
@@ -103,7 +110,8 @@ public class DemoBody  implements Serializable {
    * Required string property
    * @return foo
   **/
-  @ApiModelProperty(value = "Required string property")
+  @ApiModelProperty(required = true, value = "Required string property")
+  @NotNull
 
 
   public String getFoo() {
@@ -123,7 +131,8 @@ public class DemoBody  implements Serializable {
    * Required Enum property
    * @return bar
   **/
-  @ApiModelProperty(value = "Required Enum property")
+  @ApiModelProperty(required = true, value = "Required Enum property")
+  @NotNull
 
 
   public BarEnum getBar() {
@@ -174,6 +183,49 @@ public class DemoBody  implements Serializable {
     this.qux = qux;
   }
 
+  public DemoBody reqSub(DemoSub reqSub) {
+    this.reqSub = reqSub;
+    return this;
+  }
+
+  /**
+   * Get reqSub
+   * @return reqSub
+  **/
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
+
+  @Valid
+
+  public DemoSub getReqSub() {
+    return reqSub;
+  }
+
+  public void setReqSub(DemoSub reqSub) {
+    this.reqSub = reqSub;
+  }
+
+  public DemoBody optSub(DemoSub optSub) {
+    this.optSub = optSub;
+    return this;
+  }
+
+  /**
+   * Get optSub
+   * @return optSub
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+
+  public DemoSub getOptSub() {
+    return optSub;
+  }
+
+  public void setOptSub(DemoSub optSub) {
+    this.optSub = optSub;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -187,12 +239,14 @@ public class DemoBody  implements Serializable {
     return Objects.equals(this.foo, demoBody.foo) &&
         Objects.equals(this.bar, demoBody.bar) &&
         Objects.equals(this.baz, demoBody.baz) &&
-        Objects.equals(this.qux, demoBody.qux);
+        Objects.equals(this.qux, demoBody.qux) &&
+        Objects.equals(this.reqSub, demoBody.reqSub) &&
+        Objects.equals(this.optSub, demoBody.optSub);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(foo, bar, baz, qux);
+    return Objects.hash(foo, bar, baz, qux, reqSub, optSub);
   }
 
   @Override
@@ -204,6 +258,8 @@ public class DemoBody  implements Serializable {
     sb.append("    bar: ").append(toIndentedString(bar)).append("\n");
     sb.append("    baz: ").append(toIndentedString(baz)).append("\n");
     sb.append("    qux: ").append(toIndentedString(qux)).append("\n");
+    sb.append("    reqSub: ").append(toIndentedString(reqSub)).append("\n");
+    sb.append("    optSub: ").append(toIndentedString(optSub)).append("\n");
     sb.append("}");
     return sb.toString();
   }

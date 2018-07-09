@@ -2,12 +2,26 @@ swagger: '2.0'
 info: 
   title: Bug Demo
   description: Demo of bug
-  version: 1.0
+  version: '1.0'
 host: localhost
 basePath: /
 schemes:
   - http
+produces:
+  - application/json
 definitions:
+  DemoSub:
+    type: object
+    description: Child object to body
+    properties:
+      x:
+        type: string
+        description: Required string X
+      y:
+        type: string
+        description: Optional string Y
+    required: 
+      - x
   DemoBody:
     type: object
     description: Demo body object
@@ -15,14 +29,12 @@ definitions:
       foo:
         description: Required string property
         type: string
-        required: true
       bar:
         description: Required Enum property
         type: string
         enum:
           - A
           - B
-        required: true
       baz:
         description: optional string property
         type: string
@@ -32,16 +44,30 @@ definitions:
         enum:
           - C
           - D
+      reqSub:
+        $ref: '#/definitions/DemoSub'
+      optSub:
+        $ref: '#/definitions/DemoSub'
+    required:
+      - foo
+      - bar
+      - reqSub
 paths:
-  demo:
+  '/demo':
     post:
       summary: Demo of bug
       operationId: postDemo
+      consumes:  
+        - application/json
       parameters:
-        - name: body
+        - in: body
+          name: bodyObj
           description: Body param
-          in: body
-          type: object
           schema:
             $ref: '#/definitions/DemoBody'
           required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid

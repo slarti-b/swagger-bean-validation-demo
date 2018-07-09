@@ -39,7 +39,7 @@ public interface DemoApiDelegate {
     /**
      * @see DemoApi#postDemo
      */
-    default CompletableFuture<ResponseEntity<Void>> postDemo( DemoBody  body) {
+    default CompletableFuture<ResponseEntity<Void>> postDemo( DemoBody  bodyObj) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
         } else {
             log.warn("ObjectMapper or HttpServletRequest not configured in default DemoApi interface so no example is generated");
