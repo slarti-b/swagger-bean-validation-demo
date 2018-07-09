@@ -1,0 +1,47 @@
+swagger: '2.0'
+info: 
+  title: Bug Demo
+  description: Demo of bug
+  version: 1.0
+host: localhost
+basePath: /
+schemes:
+  - http
+definitions:
+  DemoBody:
+    type: object
+    description: Demo body object
+    properties:
+      foo:
+        description: Required string property
+        type: string
+        required: true
+      bar:
+        description: Required Enum property
+        type: string
+        enum:
+          - A
+          - B
+        required: true
+      baz:
+        description: optional string property
+        type: string
+      qux:
+        description: optional enum propert
+        type: string
+        enum:
+          - C
+          - D
+paths:
+  demo:
+    post:
+      summary: Demo of bug
+      operationId: postDemo
+      parameters:
+        - name: body
+          description: Body param
+          in: body
+          type: object
+          schema:
+            $ref: '#/definitions/DemoBody'
+          required: true

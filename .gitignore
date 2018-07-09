@@ -1,0 +1,10 @@
+target
+.idea
+.project
+.metadata
+.settings
+.classpath
+README.md
+.swagger-codegen
+C20
+QA*
